@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ভাগাডহর সরকারি প্রাথমিক বিদ্যালয়</title>
+    <link rel="stylesheet" href="stle.css">
+</head>
+<body>
+    <header>
+        <h1>ভাগাডহর সরকারি প্রাথমিক বিদ্যালয়</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">হোম</a></li>
+                <li><a href="#about">আমাদের সম্পর্কে</a></li>
+                <li><a href="#academics">একাডেমিক তথ্য</a></li>
+                <li><a href="#enrollment">ভর্তি</a></li>
+                <li><a href="#news">সংবাদ ও ঘটনা</a></li>
+                <li><a href="#schedule">ক্লাস সময়সূচি</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section id="home">
+        <h2>স্বাগতম!</h2>
+        <img src="school.jpg" alt="প্রধান স্কুল ভবন">
+        <p>আমাদের ভাগাডহর সরকারি প্রাথমিক বিদ্যালয়ে আপনাকে স্বাগতম। <br> এখানে আমরা শিক্ষার্থীদের মানসম্মত শিক্ষা প্রদান করি।</p>
+        <h3>আমাদের অবস্থান</h3>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d269.31625673852886!2d92.1912897953068!3d24.744959814757912!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3751c901ecafaa79%3A0x79db2f5334c9d4aa!2sVagadohor%20Government%20Primary%20School!5e0!3m2!1sen!2sbd!4v1742047352361!5m2!1sen!2sbd" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        
+        <h2>ছবি</h2>
+       <p>
+        <img src="classroom.jpg" alt="" srcset="শ্রেণিকক্ষের ছবি">
+        <img src="classint.jpg" alt="" srcset="শ্রেণিকক্ষ">
+        <img src="playground.jpg" alt="" srcset="খেলার মাঠ">
+        <img src="sopoth.jpg" alt="শপথ পাঠ">
+        <img src="khela.jpg" alt="অংক দৌড়">
+        <img src="multimedia.jpg" alt="মাল্টিমিডিয়া ক্লাস">
+       </p>
+    </section>
+
+    <section id="about">
+        <h2>আমাদের সম্পর্কে</h2>
+        <p>প্রতিষ্ঠিত: ১৮০০<br>
+        অবস্থান: ইউনিয়নঃ নিজবাহাদুরপুর, উপজেলাঃ বড়লেখা, জেলাঃ মৌলভীবাজার<br>
+        মোট শিক্ষার্থী: ১০৯ (বালক ৫৬, বালিকা ৫৩)<br>
+        শিক্ষক সংখ্যা: ৪ (পুরুষ ৩, মহিলা ১)<br>
+        শ্রেণিকক্ষ: ৩, অফিস কক্ষ: ১</p>
+    </section>
+    
+
+    <section id="academics">
+        <h2>একাডেমিক তথ্য</h2>
+        <p>শ্রেণিভিত্তিক শিক্ষার্থীর সংখ্যা:</p>
+        <ul>
+            <li>প্রাক-প্রাথমিক: ২০ জন</li>
+            <li>প্রথম শ্রেণি: ২৭ জন</li>
+            <li>দ্বিতীয় শ্রেণি: ১৯ জন</li>
+            <li>তৃতীয় শ্রেণি: ১৯ জন</li>
+            <li>চতুর্থ শ্রেণি: ১৩ জন</li>
+            <li>পঞ্চম শ্রেণি: ১১ জন</li>
+        </ul>
+    </section>
+
+    <section id="enrollment">
+        <h2>ভর্তি ফরম</h2>
+        <form action="https://formspree.io/f/xeoaolya" method="POST">
+            <div>
+                <label for="name">শিক্ষার্থীর নাম:</label><br>
+                <input type="text" id="name" name="name" placeholder="শিক্ষার্থীর নাম লিখুন" required><br>
+            </div>
+
+            <div>
+                <label for="dob">জন্ম তারিখ:</label><br>
+                <input type="date" id="dob" name="dob" required><br>
+            </div>
+            
+            <div>
+                <label for="birth_certificate">জন্ম সনদের নম্বর:</label><br>
+                <input type="text" id="birth_certificate" name="birth_certificate" placeholder="জন্ম সনদের নম্বর লিখুন" required><br>
+            </div>
+    
+            <div>
+                <label for="mother_name">মাতার নাম:</label><br>
+                <input type="text" id="mother_name" name="mother_name" placeholder="মাতার নাম লিখুন" required><br>
+            </div>
+    
+            <div>
+                <label for="mother_id">মাতার জাতীয় পরিচয় পত্রের নম্বর:</label><br>
+                <input type="number" id="mother_id" name="mother_id" placeholder="মাতার NID নম্বর লিখুন" required><br>
+            </div>
+            
+            <div>
+                <label for="dob">মাতার জন্ম তারিখ:</label><br>
+                <input type="date" id="dob" name="mdob" required><br>
+            </div>
+    
+            <div>
+                <label for="father_name">পিতার নাম:</label><br>
+                <input type="text" id="father_name" name="father_name" placeholder="পিতার নাম লিখুন" required><br>
+            </div>
+    
+            <div>
+                <label for="father_id">পিতার জাতীয় পরিচয় পত্রের নম্বর:</label><br>
+                <input type="number" id="father_id" name="father_id" placeholder="পিতার NID নম্বর লিখুন" required><br>
+            </div>
+
+            <div>
+                <label for="dob">পিতার জন্ম তারিখ:</label><br>
+                <input type="date" id="dob" name="fdob" required><br>
+            </div>
+    
+            <div>
+                <label for="mobile">অভিভাবকের মোবাইল নম্বর:</label><br>
+                <input type="tel" id="mobile" name="mobile" placeholder="মোবাইল নম্বর লিখুন" required><br>
+            </div>
+    
+            <div>
+                <label for="email">ইমেইল:</label><br>
+                <input type="email" id="email" name="email" placeholder="ইমেইল লিখুন" required><br>
+            </div>
+    
+            <div>
+                <label for="address">ঠিকানা:</label><br>
+                <input type="text" id="address" name="address" placeholder="ঠিকানা লিখুন" required><br>
+            </div>
+    
+            <div>
+                <label for="photo_link">ছাত্রের ছবির লিংক (Google Drive / Imgur):</label><br>
+                <input type="url" id="photo_link" name="photo_link" placeholder="ছবির লিংক এখানে দিন" required><br>
+            </div>
+    
+            <div>
+                <input type="submit" value="জমা দিন">
+            </div>
+        </form>
+    </section>
+
+    <section id="news">
+        <h2>সংবাদ ও ঘটনা</h2>
+        <p>সাম্প্রতিক খবর এবং স্কুলের কার্যক্রমের তথ্য এখানে থাকবে।</p>
+    </section>
+
+    <section id="schedule">
+        <h2>ক্লাস সময়সূচি</h2>
+        <p>
+            <embed src="ক্লাস রুটিন-২৫ vaga.pdf" type="application/pdf" width="100%" height="600px">
+        </p>
+    </section>
+
+    <section id="reviews">
+    <h2>মতামত ও রিভিউ</h2>
+    <form id="reviewForm">
+        <div>
+            <label for="reviewer_name">আপনার নাম:</label><br>
+            <input type="text" id="reviewer_name" name="name" placeholder="আপনার নাম লিখুন" required><br>
+        </div>
+
+        <div>
+            <label for="email">ইমেইল:</label><br>
+            <input type="email" id="email" name="email" placeholder="আপনার ইমেইল লিখুন" required><br>
+        </div>
+
+        <div>
+            <label for="review">আপনার মতামত বা স্কুল নিয়ে কোন স্মৃতি শেয়ার করুন:</label><br>
+            <textarea id="review" name="review" rows="4" placeholder=" " required></textarea><br>
+        </div>
+
+        <div>
+            <label for="rating">রেটিং:</label><br>
+            <select id="rating" name="rating" required>
+                <option value="5">৫ - অসাধারণ</option>
+                <option value="4">৪ - ভালো</option>
+                <option value="3">৩ - গড়পড়তা</option>
+                <option value="2">২ - খারাপ</option>
+                <option value="1">১ - খুবই খারাপ</option>
+            </select><br>
+        </div>
+
+        <div>
+            <input type="submit" value="জমা দিন">
+        </div>
+    </form>
+
+    <h3>পূর্ববর্তী রিভিউ</h3>
+    <ul id="reviewList">
+        <!-- Submitted reviews will appear here -->
+    </ul>
+</section>
+    <footer>
+        <p>&copy; ২০২৫ ভাগাডহর সরকারি প্রাথমিক বিদ্যালয়</p>
+    </footer>
+
+    <script>
+        document.getElementById("reviewForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+        
+            const name = document.getElementById("reviewer_name").value;
+            const email = document.getElementById("email").value;
+            const review = document.getElementById("review").value;
+            const rating = document.getElementById("rating").value;
+        
+            const reviewData = { name, email, review, rating };
+        
+            await fetch("http://localhost:3000/reviews", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(reviewData)
+            });
+        
+            document.getElementById("reviewForm").reset();
+            loadReviews();
+        });
+        
+        async function loadReviews() {
+            const response = await fetch("http://localhost:3000/reviews");
+            const reviews = await response.json();
+            const reviewList = document.getElementById("reviewList");
+            reviewList.innerHTML = "";
+        
+            reviews.forEach(({ id, name, review, rating }) => {
+                const li = document.createElement("li");
+                li.innerHTML = `${name} (${rating}★): ${review} <button onclick="deleteReview(${id})">🗑️</button>`;
+                reviewList.appendChild(li);
+            });
+        }
+        
+        async function deleteReview(id) {
+            await fetch(`http://localhost:3000/reviews/${id}`, {
+                method: "DELETE"
+            });
+            loadReviews();
+        }
+        
+        document.addEventListener("DOMContentLoaded", loadReviews);
+        </script>
+        
+</body>
+</html>

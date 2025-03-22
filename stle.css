@@ -1,0 +1,129 @@
+/* Existing styles... */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5dc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: #3e8e41;
+    margin: 0;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+}
+
+nav ul li a:hover {
+    background-color: #2e7031;
+    border-radius: 5px;
+}
+
+section {
+    padding: 20px;
+    text-align: center;
+}
+
+form {
+    background: white;
+    padding: 20px;
+    width: 90%; /* Adjust width for smaller screens */
+    max-width: 600px; /* Limit maximum width */
+    margin: auto;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px gray;
+}
+
+input[type="text"], input[type="email"], input[type="url"], input[type="tel"], input[type="date"], textarea, select {
+    width: 100%; /* Full width for inputs */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    width: 100%; /* Full width for submit button */
+    border-radius: 5px;
+}
+
+input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+footer {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column; /* Stack navigation links vertically */
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    section {
+        padding: 10px;
+    }
+
+    form {
+        width: 100%; /* Full width for smaller screens */
+        padding: 15px;
+    }
+
+    input[type="text"], input[type="email"], input[type="url"], input[type="tel"], input[type="date"], textarea, select {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+
+    input[type="submit"] {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        font-size: 18px; /* Adjust header font size */
+    }
+
+    nav ul li a {
+        font-size: 16px; /* Adjust navigation link font size */
+    }
+}
