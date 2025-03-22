@@ -148,92 +148,105 @@
         </p>
     </section>
 
-    <section id="reviews">
-    <h2>মতামত ও রিভিউ</h2>
     <form id="reviewForm">
         <div>
-            <label for="reviewer_name">আপনার নাম:</label><br>
-            <input type="text" id="reviewer_name" name="name" placeholder="আপনার নাম লিখুন" required><br>
+          <label for="reviewer_name">আপনার নাম:</label><br>
+          <input type="text" id="reviewer_name" name="name" placeholder="আপনার নাম লিখুন" required><br>
         </div>
-
+      
         <div>
-            <label for="email">ইমেইল:</label><br>
-            <input type="email" id="email" name="email" placeholder="আপনার ইমেইল লিখুন" required><br>
+          <label for="email">ইমেইল:</label><br>
+          <input type="email" id="email" name="email" placeholder="আপনার ইমেইল লিখুন" required><br>
         </div>
-
+      
         <div>
-            <label for="review">আপনার মতামত বা স্কুল নিয়ে কোন স্মৃতি শেয়ার করুন:</label><br>
-            <textarea id="review" name="review" rows="4" placeholder=" " required></textarea><br>
+          <label for="review">আপনার মতামত:</label><br>
+          <textarea id="review" name="review" rows="4" required></textarea><br>
         </div>
-
+      
         <div>
-            <label for="rating">রেটিং:</label><br>
-            <select id="rating" name="rating" required>
-                <option value="5">৫ - অসাধারণ</option>
-                <option value="4">৪ - ভালো</option>
-                <option value="3">৩ - গড়পড়তা</option>
-                <option value="2">২ - খারাপ</option>
-                <option value="1">১ - খুবই খারাপ</option>
-            </select><br>
+          <label for="rating">রেটিং:</label><br>
+          <select id="rating" name="rating" required>
+            <option value="5">৫ - অসাধারণ</option>
+            <option value="4">৪ - ভালো</option>
+            <option value="3">৩ - গড়পড়তা</option>
+            <option value="2">২ - খারাপ</option>
+            <option value="1">১ - খুবই খারাপ</option>
+          </select><br>
         </div>
-
+      
         <div>
-            <input type="submit" value="জমা দিন">
+          <input type="submit" value="জমা দিন">
         </div>
-    </form>
-
-    <h3>পূর্ববর্তী রিভিউ</h3>
-    <ul id="reviewList">
-        <!-- Submitted reviews will appear here -->
-    </ul>
-</section>
+      </form>
+      <ul id="reviewList">
+        <!-- Reviews will appear here -->
+      </ul>
+      
     <footer>
         <p>&copy; ২০২৫ ভাগাডহর সরকারি প্রাথমিক বিদ্যালয়</p>
     </footer>
 
-    <script>
-        document.getElementById("reviewForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-        
-            const name = document.getElementById("reviewer_name").value;
-            const email = document.getElementById("email").value;
-            const review = document.getElementById("review").value;
-            const rating = document.getElementById("rating").value;
-        
-            const reviewData = { name, email, review, rating };
-        
-            await fetch("http://localhost:3000/reviews", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(reviewData)
-            });
-        
-            document.getElementById("reviewForm").reset();
-            loadReviews();
+    <script type="module">
+        // Import the functions you need from the SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js";
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyD9VCgMTn5OKHK-e9FjdX3rzQUZGNEwK9c",
+          authDomain: "schoolreviews-a078a.firebaseapp.com",
+          projectId: "schoolreviews-a078a",
+          storageBucket: "schoolreviews-a078a.appspot.com",
+          messagingSenderId: "898670320067",
+          appId: "1:898670320067:web:c2472fd9fd34970b408576"
+        };
+      
+        // Initialize Firebase and Firestore
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+      
+        // Submit Review
+        document.getElementById("reviewForm").addEventListener("submit", async function (event) {
+          event.preventDefault();
+      
+          const name = document.getElementById("reviewer_name").value;
+          const email = document.getElementById("email").value;
+          const review = document.getElementById("review").value;
+          const rating = document.getElementById("rating").value;
+      
+          // Save review to Firestore
+          await addDoc(collection(db, "reviews"), {
+            name,
+            email,
+            review,
+            rating,
+            timestamp: new Date()
+          });
+      
+          document.getElementById("reviewForm").reset();
+          loadReviews();
         });
-        
+      
+        // Load Reviews
         async function loadReviews() {
-            const response = await fetch("http://localhost:3000/reviews");
-            const reviews = await response.json();
-            const reviewList = document.getElementById("reviewList");
-            reviewList.innerHTML = "";
-        
-            reviews.forEach(({ id, name, review, rating }) => {
-                const li = document.createElement("li");
-                li.innerHTML = `${name} (${rating}★): ${review} <button onclick="deleteReview(${id})">🗑️</button>`;
-                reviewList.appendChild(li);
-            });
+          const q = query(collection(db, "reviews"), orderBy("timestamp", "desc"));
+          const querySnapshot = await getDocs(q);
+      
+          const reviewList = document.getElementById("reviewList");
+          reviewList.innerHTML = "";
+      
+          querySnapshot.forEach((doc) => {
+            const { name, review, rating } = doc.data();
+            const li = document.createElement("li");
+            li.textContent = `${name} (${rating}★): ${review}`;
+            reviewList.appendChild(li);
+          });
         }
-        
-        async function deleteReview(id) {
-            await fetch(`http://localhost:3000/reviews/${id}`, {
-                method: "DELETE"
-            });
-            loadReviews();
-        }
-        
+      
         document.addEventListener("DOMContentLoaded", loadReviews);
-        </script>
+      </script>
+      
         
 </body>
 </html>
