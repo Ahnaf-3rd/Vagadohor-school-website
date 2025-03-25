@@ -46,7 +46,10 @@
         অবস্থান: ইউনিয়নঃ নিজবাহাদুরপুর, উপজেলাঃ বড়লেখা, জেলাঃ মৌলভীবাজার<br>
         মোট শিক্ষার্থী: ১০৯ (বালক ৫৬, বালিকা ৫৩)<br>
         শিক্ষক সংখ্যা: ৪ (পুরুষ ৩, মহিলা ১)<br>
-        শ্রেণিকক্ষ: ৩, অফিস কক্ষ: ১</p>
+        শ্রেণিকক্ষ: ৩, অফিস কক্ষ: ১<br>
+        প্রধান শিক্ষকের যোগাযোগ:<br>
+        ইমেইল: <a href="mailto:atah2021@gmail.com">atah2021@gmail.com</a><br>
+        মোবাইল: <a href="tel:+8801796322501">+৮৮০১৭৯৬৩২২৫০১</a></p>
     </section>
     
 
@@ -70,7 +73,7 @@
                 <label for="name">শিক্ষার্থীর নাম:</label><br>
                 <input type="text" id="name" name="name" placeholder="শিক্ষার্থীর নাম লিখুন" required><br>
             </div>
-
+    
             <div>
                 <label for="dob">জন্ম তারিখ:</label><br>
                 <input type="date" id="dob" name="dob" required><br>
@@ -79,6 +82,19 @@
             <div>
                 <label for="birth_certificate">জন্ম সনদের নম্বর:</label><br>
                 <input type="text" id="birth_certificate" name="birth_certificate" placeholder="জন্ম সনদের নম্বর লিখুন" required><br>
+            </div>
+    
+            <div>
+                <label for="class">ভর্তি কাঙ্ক্ষিত শ্রেণি:</label><br>
+                <select id="class" name="class" required>
+                    <option value="">--শ্রেণি নির্বাচন করুন--</option>
+                    <option value="pre-primary">প্রাক-প্রাথমিক</option>
+                    <option value="class1">প্রথম শ্রেণি</option>
+                    <option value="class2">দ্বিতীয় শ্রেণি</option>
+                    <option value="class3">তৃতীয় শ্রেণি</option>
+                    <option value="class4">চতুর্থ শ্রেণি</option>
+                    <option value="class5">পঞ্চম শ্রেণি</option>
+                </select><br>
             </div>
     
             <div>
@@ -105,7 +121,7 @@
                 <label for="father_id">পিতার জাতীয় পরিচয় পত্রের নম্বর:</label><br>
                 <input type="number" id="father_id" name="father_id" placeholder="পিতার NID নম্বর লিখুন" required><br>
             </div>
-
+    
             <div>
                 <label for="dob">পিতার জন্ম তারিখ:</label><br>
                 <input type="date" id="dob" name="fdob" required><br>
