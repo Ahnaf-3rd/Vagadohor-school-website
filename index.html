@@ -143,9 +143,12 @@
                 <input type="text" id="address" name="address" placeholder="ঠিকানা লিখুন" required><br>
             </div>
     
-            <div>
-                <label for="photo_link">ছাত্রের ছবির লিংক (Google Drive / Imgur):</label><br>
-                <input type="url" id="photo_link" name="photo_link" placeholder="ছবির লিংক এখানে দিন" required><br>
+            <div class="photo-upload">
+                <label>
+                    <input type="file" id="student_photo" name="student_photo" accept="image/*" capture="camera" required>
+                    <span class="upload-button">ছবি তোলুন বা আপলোড করুন</span>
+                </label>
+                <div class="photo-preview" id="photoPreview"></div>
             </div>
     
             <div>
