@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ভাগাডহর সরকারি প্রাথমিক বিদ্যালয়</title>
     <link rel="stylesheet" href="stle.css">
+      <!-- ... your existing head content ... -->
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script>
+        // Remove Cloudinary config and keep only Axios
+        const imgbbApiKey = '2458c33e1c34130b96aca68408ba08b0'; // Get this from imgBB (free)
+      </script>
 </head>
 <body>
     <header>
@@ -67,12 +73,11 @@
             <li>তৃতীয় শ্রেণি: ১৯ জন</li>
             <li>চতুর্থ শ্রেণি: ১৩ জন</li>
             <li>পঞ্চম শ্রেণি: ১১ জন</li>
-        </ul>
     </section>
 
     <section id="enrollment">
-        <h2>ভর্তি ফরম</h2>
-        <form action="https://formspree.io/f/myzewgll" method="POST">
+      <h2>ভর্তি ফরম</h2>
+      <form id="admissionForm">
             <div>
                 <label for="name">শিক্ষার্থীর নাম:</label><br>
                 <input type="text" id="name" name="name" placeholder="শিক্ষার্থীর নাম লিখুন" required><br>
@@ -147,15 +152,18 @@
             </div>
     
             <div class="photo-upload">
-                <label>
-                    <input type="file" id="student_photo" name="student_photo" accept="image/*" required>
-                    <span class="upload-button">ছবি তোলুন বা আপলোড করুন</span>
-                </label>
-                <div class="photo-preview" id="photoPreview"></div>
-            </div>
-    
-            <div>
-                <input type="submit" value="জমা দিন">
+              <label>
+                  <input type="file" id="student_photo" name="student_photo" accept="image/*" required>
+                  <span class="upload-button">ছবি তোলুন বা আপলোড করুন</span>
+              </label>
+              <div class="photo-preview" id="photoPreview"></div>
+              <input type="hidden" id="photo_url" name="photo_url">
+          </div>
+          
+          <div>
+              <button type="submit" id="submitBtn">জমা দিন</button>
+              <div id="formStatus"></div>
+          </div>
             </div>
         </form>
     </section>
@@ -270,7 +278,73 @@
       
         document.addEventListener("DOMContentLoaded", loadReviews);
       </script>
-      
+      <script>
+        function toggleMenu() {
+  const nav = document.getElementById("mainNav").querySelector("ul");
+  nav.classList.toggle("active");
+}
+      </script>
+     <script>
+      document.getElementById('admissionForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const submitBtn = document.getElementById('submitBtn');
+        const statusDiv = document.getElementById('formStatus');
+        
+        submitBtn.disabled = true;
+        statusDiv.textContent = "ফর্ম জমা দেওয়া হচ্ছে...";
+        statusDiv.style.color = "blue";
+    
+        try {
+          // 1. Upload image to ImgBB
+          const imageFile = document.getElementById('student_photo').files[0];
+          const imgbbFormData = new FormData();
+          imgbbFormData.append('image', imageFile);
+          
+          const imgbbResponse = await axios.post(
+            'https://api.imgbb.com/1/upload?key=' + imgbbApiKey,
+            imgbbFormData
+          );
+          
+          const imageUrl = imgbbResponse.data.data.url;
+          document.getElementById('photo_url').value = imageUrl;
+          
+          // 2. Submit form to Formspree
+          const formData = new FormData(document.getElementById('admissionForm'));
+          formData.delete('student_photo'); // Remove the file before sending to Formspree
+          
+          await axios.post(
+            'https://formspree.io/f/myzewgll',
+            formData,
+            { headers: { 'Accept': 'application/json' } }
+          );
+          
+          statusDiv.textContent = "ফর্ম সফলভাবে জমা দেওয়া হয়েছে!";
+          statusDiv.style.color = "green";
+          this.reset();
+          document.getElementById('photoPreview').innerHTML = '';
+        } catch (error) {
+          console.error('Error:', error);
+          statusDiv.textContent = "ত্রুটি হয়েছে! পরে আবার চেষ্টা করুন।";
+          statusDiv.style.color = "red";
+        } finally {
+          submitBtn.disabled = false;
+        }
+      });
+    </script>
+    <script>
+      // Image preview handler
+      document.getElementById('student_photo').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            document.getElementById('photoPreview').innerHTML = 
+              `<img src="${event.target.result}" style="max-width: 200px;">`;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    </script>
         
 </body>
 </html>
