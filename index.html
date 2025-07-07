@@ -26,7 +26,6 @@
             <li><a href="#enrollment">ভর্তি</a></li>
             <li><a href="#news">সংবাদ ও ঘটনা</a></li>
             <li><a href="#schedule">ক্লাস সময়সূচি</a></li>
-            <li><a href="#study-materials">শিক্ষা উপকরণ</a></li>
           </ul>
         </nav>
       </header>
@@ -75,36 +74,6 @@
             <li>চতুর্থ শ্রেণি: ১৩ জন</li>
             <li>পঞ্চম শ্রেণি: ১১ জন</li>
     </section>
-
-    <section id="study-materials">
-    <h2>শিক্ষা উপকরণ</h2>
-    
-    <div class="filter-controls">
-        <label for="classFilter">শ্রেণি:</label>
-        <select id="classFilter">
-            <option value="">সকল শ্রেণি</option>
-            <option value="1">প্রথম শ্রেণি</option>
-            <option value="2">দ্বিতীয় শ্রেণি</option>
-            <option value="3">তৃতীয় শ্রেণি</option>
-            <option value="4">চতুর্থ শ্রেণি</option>
-            <option value="5">পঞ্চম শ্রেণি</option>
-        </select>
-
-        <label for="subjectFilter">বিষয়:</label>
-        <select id="subjectFilter">
-            <option value="">সকল বিষয়</option>
-            <option value="bengali">বাংলা</option>
-            <option value="english">ইংরেজি</option>
-            <option value="maths">গণিত</option>
-            <option value="science">বিজ্ঞান</option>
-            <option value="bgs">বাংলাদেশ ও বিশ্বপরিচয়</option>
-        </select>
-    </div>
-
-    <div id="materialsContainer" class="materials-grid">
-        <!-- Materials will load here -->
-    </div>
-</section>
 
     <section id="enrollment">
       <h2>ভর্তি ফরম</h2>
@@ -376,106 +345,6 @@
         }
       });
     </script>
-
-    <script>
-// GitHub repository configuration - USE YOUR DETAILS HERE
-const repoOwner = 'Ahnaf-3rd';
-const repoName = 'Vagadohor-school-website';
-const materialsPath = 'study-materials'; // Path to study materials folder
-
-// Function to load materials
-async function loadMaterials() {
-    const classFilter = document.getElementById('classFilter').value;
-    const subjectFilter = document.getElementById('subjectFilter').value;
-    
-    const container = document.getElementById('materialsContainer');
-    container.innerHTML = '<p>উপকরণ লোড হচ্ছে...</p>';
-    
-    try {
-        // Get list of materials from GitHub
-        const response = await fetch(`https://api.github.com/repos/${repoOwner}/${repoName}/contents/${materialsPath}`);
-        const data = await response.json();
-        
-        let html = '';
-        let count = 0;
-        
-        // Process each class folder
-        for (const classFolder of data) {
-            if (classFolder.type !== 'dir') continue;
-            
-            const classLevel = classFolder.name.replace('class', '');
-            if (classFilter && classLevel !== classFilter) continue;
-            
-            // Get subjects for this class
-            const classResponse = await fetch(classFolder.url);
-            const classData = await classResponse.json();
-            
-            for (const subjectFolder of classData) {
-                if (subjectFolder.type !== 'dir') continue;
-                
-                const subjectName = subjectFolder.name;
-                if (subjectFilter && subjectName !== subjectFilter) continue;
-                
-                // Get files for this subject
-                const subjectResponse = await fetch(subjectFolder.url);
-                const subjectData = await subjectResponse.json();
-                
-                for (const file of subjectData) {
-                    if (file.type !== 'file') continue;
-                    
-                    // Skip placeholder files
-                    if(file.name === '.gitkeep') continue;
-                    
-                    count++;
-                    const fileName = file.name.replace(/\.[^/.]+$/, ""); // Remove extension
-                    const fileUrl = file.download_url;
-                    
-                    html += `
-                    <div class="material-card">
-                        <h4>${fileName}</h4>
-                        <p><strong>শ্রেণি:</strong> ${classLevel}</p>
-                        <p><strong>বিষয়:</strong> ${getSubjectName(subjectName)}</p>
-                        <a href="${fileUrl}" class="download-btn" download>ডাউনলোড</a>
-                    </div>
-                    `;
-                }
-            }
-        }
-        
-        if (count === 0) {
-            html = '<p>কোনো উপকরণ পাওয়া যায়নি। অনুগ্রহ করে ভিন্ন ফিল্টার চেষ্টা করুন।</p>';
-        }
-        
-        container.innerHTML = html;
-        
-    } catch (error) {
-        console.error('Error loading materials:', error);
-        container.innerHTML = '<p>উপকরণ লোড করতে সমস্যা হয়েছে। পরে আবার চেষ্টা করুন।</p>';
-    }
-}
-
-// Helper function to get subject name in Bengali
-function getSubjectName(subjectCode) {
-    const subjects = {
-        'bengali': 'বাংলা',
-        'english': 'ইংরেজি',
-        'maths': 'গণিত',
-        'science': 'বিজ্ঞান',
-        'bgs': 'বাংলাদেশ ও বিশ্বপরিচয়'
-    };
-    return subjects[subjectCode] || subjectCode;
-}
-
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
-    // Load materials when filters change
-    document.getElementById('classFilter').addEventListener('change', loadMaterials);
-    document.getElementById('subjectFilter').addEventListener('change', loadMaterials);
-    
-    // Load initial materials
-    loadMaterials();
-});
-</script>
         
 </body>
 </html>
